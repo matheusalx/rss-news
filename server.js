@@ -155,6 +155,22 @@ const FEED_SOURCES = [
     color: '#ff8000',
     icon: '🔶',
   },
+  {
+    id: 'bloomberg',
+    name: 'Bloomberg',
+    url: 'https://news.google.com/rss/search?q=when:24h+site:bloomberg.com&hl=pt-BR&gl=BR&ceid=BR:pt-419',
+    category: 'Economia',
+    color: '#000000',
+    icon: '📊',
+  },
+  {
+    id: 'agencia-brasil',
+    name: 'Agência Brasil',
+    url: 'https://agenciabrasil.ebc.com.br/radioagencia-nacional/rss/politica/feed.xml',
+    category: 'Política',
+    color: '#009b3a',
+    icon: '📻',
+  },
 ];
 
 // In-memory cache
