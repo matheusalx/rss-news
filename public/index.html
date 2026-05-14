@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSS News Hub — Centralizador de Notícias</title>
+  <meta name="description" content="Centralizador moderno de notícias RSS. Acompanhe as principais fontes de notícias do Brasil e do mundo em um só lugar." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Loading overlay -->
+  <div id="loading-overlay" class="loading-overlay">
+    <div class="loader-container">
+      <div class="pulse-ring"></div>
+      <div class="pulse-ring delay-1"></div>
+      <div class="pulse-ring delay-2"></div>
+      <div class="loader-icon">📡</div>
+      <p class="loader-text">Carregando feeds...</p>
+      <div class="loader-bar"><div class="loader-bar-inner"></div></div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header id="main-header" class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <div class="logo">
+          <span class="logo-icon">📡</span>
+          <div>
+            <h1 class="logo-text">RSS News Hub</h1>
+            <span class="logo-sub">Centralizador de Notícias</span>
+          </div>
+        </div>
+      </div>
+      <div class="header-center">
+        <div class="search-box" id="search-box">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" id="search-input" placeholder="Buscar notícias..." autocomplete="off" />
+          <kbd class="search-kbd">Ctrl+K</kbd>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="view-toggle" id="view-toggle">
+          <button class="view-btn active" data-view="grid" title="Visualização em grade">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          </button>
+          <button class="view-btn" data-view="list" title="Visualização em lista">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+          </button>
+        </div>
+        <button id="refresh-btn" class="icon-btn" title="Atualizar feeds">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+        </button>
+        <div class="stats-badge" id="stats-badge">
+          <span id="article-count">0</span> artigos
+        </div>
+        <div class="last-update" id="last-update"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Category Tabs -->
+  <nav class="category-nav" id="category-nav">
+    <div class="category-nav-inner">
+      <button class="cat-tab active" data-category="all">
+        <span class="cat-icon">🌐</span> Todas
+        <span class="cat-count" id="count-all">0</span>
+      </button>
+      <button class="cat-tab" data-category="World">
+        <span class="cat-icon">🌍</span> Mundo
+        <span class="cat-count" id="count-World">0</span>
+      </button>
+      <button class="cat-tab" data-category="Brasil">
+        <span class="cat-icon">🇧🇷</span> Brasil
+        <span class="cat-count" id="count-Brasil">0</span>
+      </button>
+      <button class="cat-tab" data-category="Política">
+        <span class="cat-icon">🏛️</span> Política
+        <span class="cat-count" id="count-Política">0</span>
+      </button>
+      <button class="cat-tab" data-category="Economia">
+        <span class="cat-icon">📊</span> Economia
+        <span class="cat-count" id="count-Economia">0</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Sidebar: Source filters -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h2 class="sidebar-title">Fontes</h2>
+        <button id="toggle-all-sources" class="sidebar-toggle-btn">Todas</button>
+      </div>
+      <div class="source-list" id="source-list">
+        <!-- Dynamically populated -->
+      </div>
+    </aside>
+
+    <!-- Feed content -->
+    <section class="feed-section" id="feed-section">
+      <!-- Featured / Hero area -->
+      <div class="hero-area" id="hero-area">
+        <!-- Dynamically populated -->
+      </div>
+
+      <!-- News grid -->
+      <div class="news-grid" id="news-grid">
+        <!-- Dynamically populated -->
+      </div>
+
+      <!-- Empty state -->
+      <div class="empty-state hidden" id="empty-state">
+        <div class="empty-icon">🔍</div>
+        <h3>Nenhuma notícia encontrada</h3>
+        <p>Tente ajustar os filtros ou termos de busca.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Mobile sidebar toggle -->
+  <button class="mobile-sidebar-toggle" id="mobile-sidebar-toggle">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
+
+  <!-- Article modal -->
+  <div class="modal-overlay hidden" id="article-modal">
+    <div class="modal-content">
+      <button class="modal-close" id="modal-close">&times;</button>
+      <div class="modal-img-wrapper" id="modal-img-wrapper">
+        <img id="modal-img" src="" alt="" />
+      </div>
+      <div class="modal-body">
+        <div class="modal-source" id="modal-source"></div>
+        <h2 class="modal-title" id="modal-title"></h2>
+        <time class="modal-date" id="modal-date"></time>
+        <p class="modal-description" id="modal-description"></p>
+        <a class="modal-link" id="modal-link" href="#" target="_blank" rel="noopener noreferrer">
+          Ler artigo completo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M7 17 17 7M7 7h10v10"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
