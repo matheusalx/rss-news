@@ -73,19 +73,4 @@ Isso criará um container isolado rodando o serviço na porta `3000`.
 └── package.json         # Dependências e scripts
 ```
 
-## 🤝 Contribuição
 
-Contribuições são o que fazem a comunidade open source um lugar incrível para aprender, inspirar e criar. Qualquer contribuição que você fizer será **muito apreciada**.
-
-1. Faça um Fork do projeto
-2. Crie sua Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Faça o Commit de suas alterações (`git commit -m 'Add some AmazingFeature'`)
-4. Faça o Push para a Branch (`git push origin feature/AmazingFeature`)
-5. Abra un Pull Request
-
-## 📄 Licença
-
-Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
-
----
-Desenvolvido com ❤️ por [Seu Nome](https://github.com/seu-usuario)
